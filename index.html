@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NBA Fan Level</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .arena-container {
+        display: flex;
+        justify-content: center;
+
+        border: 1px solid grey;
+        border-radius: 8px;
+
+        width: 50%;
+
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+
+        background-color: white;
+      }
+
+      #aa-dm,
+      #bc-bn,
+      #ca-lal,
+      #msg-nyk,
+      #tdg-bc {
+        background-color: white;
+      }
+
+      .arenas-holder {
+        width: 100%;
+        height: 50%;
+
+        border: 1px solid red;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .pop-up-holder {
+        width: 100%;
+        height: 50%;
+
+        border: 1px solid blue;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .pop-up {
+        width: 500px;
+        height: 100px;
+
+        border: 1px solid green;
+      }
+
+      .header-holder {
+        width: 100%;
+        height: 50px;
+
+        border: 1px solid black;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 class="header-holder">
+      <!-- add space after NBA Fan Level = -->
+      NBA Fan Level = <span id="score-holder">0</span>
+    </h1>
+    <div class="arenas-holder">
+      <div class="arena-container" id="aa-dm">
+        American Airlines Center - Dallas, Texas - Dallas Mavericks
+      </div>
+      <div class="arena-container" id="bc-bn">
+        Barclays Center - Brooklyn, New York - Brooklyn Nets
+      </div>
+      <div class="arena-container" id="ca-lal">
+        Crypto.com Arena - Los Angeles, California - Los Angeles Lakers
+      </div>
+      <div class="arena-container" id="msg-nyk">
+        Madison Square Garden - New York, New York - New York Knicks
+      </div>
+      <div class="arena-container" id="tdg-bc">
+        TD Garden - Boston, Massachusetts - Boston Celtics
+      </div>
+    </div>
+    <div class="pop-up-holder"></div>
+  </body>
+
+  <script>
+    // if an arena is clicked, a pop-up appears with the name of the arena and a button that says 'check-in' and one that says 'cancel'
+    // if the check-in button is clicked, the pop-up disappears and the arena's background color changes to green
+    // if the cancel button is clicked, the pop-up disappears and the arena's background color changes to red
+
+    const arenas = document.querySelectorAll(".arena-container");
+    const popUpHolder = document.querySelector(".pop-up-holder");
+
+    arenas.forEach((arena) => {
+      arena.addEventListener("click", () => {
+        // clear the pop-up holder
+        popUpHolder.innerHTML = "";
+
+        const popUp = document.createElement("div");
+        popUp.classList.add("pop-up");
+        popUp.innerHTML = `
+            <p>${arena.innerHTML}</p>
+            <button id="high-games">10+ Games</button>
+            <button id="med-games">5-10 Games</button>
+            <button id="low-games">1-5 Games</button>
+            <button id="no-games">0 Games</button>`;
+
+        popUpHolder.appendChild(popUp);
+
+        const highhames = document.querySelector("#high-games");
+        const medgames = document.querySelector("#med-games");
+        const lowgames = document.querySelector("#low-games");
+        const nogames = document.querySelector("#no-games");
+
+        highhames.addEventListener("click", () => {
+          arena.style.backgroundColor = "green";
+          popUpHolder.removeChild(popUp);
+
+          // update the score
+          // for each green arena add 5 points
+          // for each orange arena add 3 points
+          // for each yellow arena add 1 point
+          // for each red arena add 0 points
+          const scoreHolder = document.querySelector("#score-holder");
+          const arenas = document.querySelectorAll(".arena-container");
+          let score = 0;
+
+          arenas.forEach((arena) => {
+            if (arena.style.backgroundColor === "green") {
+              score += 5;
+            } else if (arena.style.backgroundColor === "orange") {
+              score += 3;
+            } else if (arena.style.backgroundColor === "yellow") {
+              score += 1;
+            } else if (arena.style.backgroundColor === "red") {
+              score += 0;
+            }
+          });
+
+          scoreHolder.innerHTML = score;
+        });
+
+        medgames.addEventListener("click", () => {
+          arena.style.backgroundColor = "orange";
+          popUpHolder.removeChild(popUp);
+
+          // update the score
+          // for each green arena add 5 points
+          // for each orange arena add 3 points
+          // for each yellow arena add 1 point
+          // for each red arena add 0 points
+          const scoreHolder = document.querySelector("#score-holder");
+          const arenas = document.querySelectorAll(".arena-container");
+          let score = 0;
+
+          arenas.forEach((arena) => {
+            if (arena.style.backgroundColor === "green") {
+              score += 5;
+            } else if (arena.style.backgroundColor === "orange") {
+              score += 3;
+            } else if (arena.style.backgroundColor === "yellow") {
+              score += 1;
+            } else if (arena.style.backgroundColor === "red") {
+              score += 0;
+            }
+          });
+
+          scoreHolder.innerHTML = score;
+        });
+
+        lowgames.addEventListener("click", () => {
+          arena.style.backgroundColor = "yellow";
+          popUpHolder.removeChild(popUp);
+
+          // update the score
+          // for each green arena add 5 points
+          // for each orange arena add 3 points
+          // for each yellow arena add 1 point
+          // for each red arena add 0 points
+          const scoreHolder = document.querySelector("#score-holder");
+          const arenas = document.querySelectorAll(".arena-container");
+          let score = 0;
+
+          arenas.forEach((arena) => {
+            if (arena.style.backgroundColor === "green") {
+              score += 5;
+            } else if (arena.style.backgroundColor === "orange") {
+              score += 3;
+            } else if (arena.style.backgroundColor === "yellow") {
+              score += 1;
+            } else if (arena.style.backgroundColor === "red") {
+              score += 0;
+            }
+          });
+
+          scoreHolder.innerHTML = score;
+        });
+
+        nogames.addEventListener("click", () => {
+          arena.style.backgroundColor = "red";
+          popUpHolder.removeChild(popUp);
+
+          // update the score
+          // for each green arena add 5 points
+          // for each orange arena add 3 points
+          // for each yellow arena add 1 point
+          // for each red arena add 0 points
+          const scoreHolder = document.querySelector("#score-holder");
+          const arenas = document.querySelectorAll(".arena-container");
+          let score = 0;
+
+          arenas.forEach((arena) => {
+            if (arena.style.backgroundColor === "green") {
+              score += 5;
+            } else if (arena.style.backgroundColor === "orange") {
+              score += 3;
+            } else if (arena.style.backgroundColor === "yellow") {
+              score += 1;
+            } else if (arena.style.backgroundColor === "red") {
+              score += 0;
+            }
+          });
+
+          scoreHolder.innerHTML = score;
+        });
+      });
+    });
+  </script>
+
+  <!-- <script>
+    const arenas = document.querySelectorAll(".arena-container");
+
+    arenas.forEach((arena) => {
+      arena.addEventListener("click", () => {
+        // log the id of the arena that was clicked
+        console.log(arena.id);
+
+        const popUpHolder = document.querySelector(".pop-up-holder");
+
+        const popUp = document.createElement("div");
+        popUp.classList.add("pop-up");
+
+        // add name of arena to pop up
+        popUp.innerHTML = arena.innerHTML;
+
+        // add line break after arena name
+        popUp.innerHTML += "<br />";
+
+        // add a 10+ games button
+        const button = document.createElement("button");
+        button.id = "button-high";
+        button.textContent = "10+ games";
+        popUp.appendChild(button);
+
+        // add listener to button
+        button.addEventListener("click", () => {
+          console.log("10+ games button clicked");
+        });
+
+        // add a 5-10 games button
+        const button2 = document.createElement("button");
+        button2.id = "button2";
+        button2.textContent = "5-10 games";
+        popUp.appendChild(button2);
+
+        // add a 1-5 games button
+        const button3 = document.createElement("button");
+        button3.id = "button3";
+        button3.textContent = "1-5 games";
+        popUp.appendChild(button3);
+
+        // add a 0 games button
+        const button4 = document.createElement("button");
+        button4.id = "button4";
+        button4.textContent = "0 games";
+        popUp.appendChild(button4);
+
+        popUpHolder.innerHTML = popUp.outerHTML;
+      });
+    });
+  </script>
+
+  <script>
+    // keep checking if button exists
+    const interval = setInterval(() => {
+      const button = document.querySelector("#button-high");
+      console.log("checking for button");
+
+      if (button) {
+        // button exists, stop checking
+        clearInterval(interval);
+        console.log("button exists");
+
+        // add event listener to button
+        button.addEventListener("click", () => {
+          // log the id of the arena that was clicked
+          console.log("button clicked");
+
+          // get the arena id
+          const arenaId = button.parentElement.id;
+          console.log("Arena ID: " + arenaId);
+        });
+      }
+    }, 100);
+  </script> -->
+</html>
